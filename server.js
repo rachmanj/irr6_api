@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
+const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 
 // Load env vars
@@ -12,6 +13,7 @@ connectDB();
 
 // Route files
 const invoiceRoutes = require('./routes/invoices');
+const projectRoutes = require('./routes/projects');
 
 const app = express();
 
@@ -25,6 +27,9 @@ if (process.env.NODE_ENV === 'development') {
 
 // Mount routers
 app.use('/api/v1/invoices', invoiceRoutes);
+app.use('/api/v1/projects', projectRoutes);
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 

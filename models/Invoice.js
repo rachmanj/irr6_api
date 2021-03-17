@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const InvoiceSchema = new mongoose.Schema({
-  number: {
+  invoiceNo: {
     type: String,
     required: [true, 'Invoice Number is required'],
     unique: true,
@@ -14,15 +14,19 @@ const InvoiceSchema = new mongoose.Schema({
   amount: Number,
   vat: {
     type: Boolean,
-    default: false
+    default: false,
   },
-  type: String,
-  project:
+  invoiceType: String,
+  project: String,
   supplier: {
     type: String,
     required: true,
   },
   receiveDate: {
+    type: Date,
+    default: Date.now,
+  },
+  createdAt: {
     type: Date,
     default: Date.now,
   },

@@ -3,8 +3,13 @@ const Invoice = require('../models/Invoice');
 // @desc    Get all invoices
 // @route   GET /api/v1/invoices
 // @access  private
-exports.getInvoices = (req, res) => {
-  res.status(200).json({ success: true, msg: 'Show all invoices' });
+exports.getInvoices = async (req, res) => {
+  const invoices = await Invoice.find({});
+
+  res.status(200).json({
+    success: true,
+    data: invoices,
+  });
 };
 
 // @desc    Get single invoice
